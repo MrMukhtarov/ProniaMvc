@@ -1,18 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using ProniaMvc.DataAccess;
-using ProniaMvc.ExtentionsServices.Implements;
-using ProniaMvc.ExtentionsServices.Interfaces;
-using ProniaMvc.Services.Implements;
-using ProniaMvc.Services.Interfaces;
+using ProniaMvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
-builder.Services.AddScoped<ISliderService, SliderService>();
-builder.Services.AddScoped<IFileService, FileService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddService();
+builder.Services.AddSession();
 
 builder.Services.AddDbContext<ProniaDbContext>(opt =>
 {
@@ -32,7 +30,7 @@ if (app.Environment.IsProduction())
 {
     app.UseStatusCodePagesWithRedirects("~/error.html");
 }
-
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

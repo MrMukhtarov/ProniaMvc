@@ -21,6 +21,27 @@ namespace ProniaMvc.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ProniaMvc.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -65,6 +86,29 @@ namespace ProniaMvc.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("ProniaMvc.Models.ProductCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductCategories");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +129,27 @@ namespace ProniaMvc.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("ProniaMvc.Models.Setting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("ProniaMvc.Models.Slider", b =>
@@ -123,6 +188,25 @@ namespace ProniaMvc.Migrations
                     b.ToTable("Sliders");
                 });
 
+            modelBuilder.Entity("ProniaMvc.Models.ProductCategory", b =>
+                {
+                    b.HasOne("ProniaMvc.Models.Category", "Category")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProniaMvc.Models.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.ProductImage", b =>
                 {
                     b.HasOne("ProniaMvc.Models.Product", "Product")
@@ -134,8 +218,15 @@ namespace ProniaMvc.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ProniaMvc.Models.Category", b =>
+                {
+                    b.Navigation("ProductCategories");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.Product", b =>
                 {
+                    b.Navigation("ProductCategories");
+
                     b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618

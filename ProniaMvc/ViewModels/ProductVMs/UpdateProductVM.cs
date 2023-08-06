@@ -19,5 +19,7 @@ public record UpdateProductVM
     public byte Rating { get; set; }
     public IFormFile? MainImage { get; set; }
     public IFormFile? HoverImage { get; set; }
-    public List<IFormFile>? ProductImages { get; set; }
+    public ICollection<IFormFile>? ProductImages { get; set; }
+    [Required]
+    public List<int> CategoryIds { get; set; }
 }

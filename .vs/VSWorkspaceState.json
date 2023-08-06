@@ -4,13 +4,15 @@
     "\\ProniaMvc",
     "\\ProniaMvc\\Areas",
     "\\ProniaMvc\\Areas\\Manage",
-    "\\ProniaMvc\\Areas\\Manage\\Controllers",
+    "\\ProniaMvc\\Areas\\Manage\\Views",
+    "\\ProniaMvc\\Areas\\Manage\\Views\\Product",
     "\\ProniaMvc\\Extentions",
     "\\ProniaMvc\\Services",
     "\\ProniaMvc\\Services\\Implements",
     "\\ProniaMvc\\Views",
-    "\\ProniaMvc\\Views\\Home"
+    "\\ProniaMvc\\Views\\Home",
+    "\\ProniaMvc\\Views\\Shared"
   ],
-  "SelectedNode": "\\ProniaMvc\\Views\\Home\\Index.cshtml",
+  "SelectedNode": "\\ProniaMvc\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }
