@@ -181,8 +181,8 @@
                     .then(res => {
                         $(".products").html(res);
                         skip += take;
-                        console.log(take)
-                        console.log(skip)
+                        console.log(take + "nextTake")
+                        console.log(skip + "NextSkip")
                         isFetching = false;
                     })
                     .catch(e => {
@@ -200,8 +200,8 @@
                     .then(data => data.text())
                     .then(res => {
                         $(".products").html(res);
-                        console.log(take)
-                        console.log(skip)
+                        console.log(take + "PrevTake")
+                        console.log(skip + "NextSkip")
                         isFetching = false;
                     })
                     .catch(e => {

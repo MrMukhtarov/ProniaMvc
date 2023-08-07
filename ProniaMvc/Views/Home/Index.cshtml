@@ -1383,9 +1383,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         let prods = document.querySelectorAll(".feat-prod .pe-7s-cart");
-        prods.forEach(prod => {
-            prod.addEventListener("click", e => {
-                e.preventDefault();
+        document.getElementById("myTabContent").addEventListener("click", e => {
+            e.preventDefault();
+            if(e.srcElement.classList.contains("pe-7s-cart"))
+            {
                 fetch(e.target.parentElement.href)
                     .then(res => {
                         if (res.ok) {
@@ -1455,8 +1456,17 @@
                             "hideMethod": "fadeOut"
                         }
                     })
-            })
+            }
+            else if (e.target.tagName.toLowerCase() === 'a') {
+                window.location.href = e.target.href;
+            }
         })
+        //prods.forEach(prod => {
+        //    prod.addEventListener("click", e => {
+        //        e.preventDefault();
+               
+        //    })
+        //})
 
     </script>
 }

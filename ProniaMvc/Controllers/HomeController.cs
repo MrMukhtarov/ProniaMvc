@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using NuGet.ContentModel;
 using ProniaMvc.Services.Interfaces;
 using ProniaMvc.ViewModels.BasketVMs;
 using ProniaMvc.ViewModels.HomeVMs;
-using System.Text.Json.Nodes;
 
 namespace ProniaMvc.Controllers;
 
