@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaMvc.Extentions;
 using ProniaMvc.Services.Interfaces;
 using ProniaMvc.ViewModels.SliderVMs;
 
 namespace ProniaMvc.Areas.Manage.Controllers;
 [Area("Manage")]
+[Authorize(Roles = "Admin ,Editor")]
 public class SliderController : Controller
 {
     private readonly ISliderService _sliderService;
@@ -36,10 +38,10 @@ public class SliderController : Controller
         {
             if (sliderVM.ImageFile != null)
             {
-                if (!sliderVM.ImageFile.IsTypeValid("image"));
-                    ModelState.AddModelError("ImageFile", "Wrong file type");
-                if (sliderVM.ImageFile.IsSizeValid(2));
-                    ModelState.AddModelError("ImageFile", "File maximum size is 2mb");
+                if (!sliderVM.ImageFile.IsTypeValid("image")) ;
+                ModelState.AddModelError("ImageFile", "Wrong file type");
+                if (sliderVM.ImageFile.IsSizeValid(2)) ;
+                ModelState.AddModelError("ImageFile", "File maximum size is 2mb");
             }
             if (!ModelState.IsValid) return View();
             await _sliderService.Create(sliderVM);

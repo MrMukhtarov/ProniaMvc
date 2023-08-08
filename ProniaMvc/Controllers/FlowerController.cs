@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProniaMvc.DataAccess;
 using ProniaMvc.Models;
@@ -12,11 +14,14 @@ public class FlowerController : Controller
     readonly IProductService _service;
     readonly ProniaDbContext _context;
     readonly IProductService _prodService;
-    public FlowerController(IProductService service, ProniaDbContext context, IProductService productService)
+    readonly UserManager<AppUser> _userManager;
+    public FlowerController(IProductService service, ProniaDbContext context,
+        IProductService productService, UserManager<AppUser> userManager)
     {
         _service = service;
         _context = context;
         _prodService = productService;
+        _userManager = userManager;
     }
     public async Task<IActionResult> Index()
     {
@@ -36,7 +41,9 @@ public class FlowerController : Controller
         if (id == null || id <= 0) return BadRequest();
 
         //var entity = await _service.GetById(id);
-        var entity = await _service.GetTable.Include(p => p.ProductImages).SingleOrDefaultAsync(p => p.Id == id
+        var entity = await _service.GetTable.Include(p => p.ProductImages).
+            Include(p => p.ProductComments).ThenInclude(pc => pc.AppUser).
+            SingleOrDefaultAsync(p => p.Id == id
         && p.IsDeleted == false);
         if (entity == null) return NotFound();
         return View(entity);
@@ -66,4 +73,33 @@ public class FlowerController : Controller
         return PartialView("_ProductsFilterPartial",
             await _prodService.GetTable.Skip(skip).Take(take).ToListAsync());
     }
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> PostComment(AddCommentToProductVM vm)
+    {
+        if (vm.ProductId <= 0)
+        {
+            return BadRequest();
+        }
+        if (!await _context.Products.AnyAsync(p => p.Id == vm.ProductId))
+        {
+            return NotFound();
+        }
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        await _context.ProductComments.AddAsync(new ProductComment
+        {
+            ProductsId = vm.ProductId,
+            AppUser = user,
+            UserId = user.Id,
+            Comment = vm.Comment,
+            PostedTime = DateTime.UtcNow
+        });
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Detail),new {id = vm.ProductId});
+    }
 }
+    

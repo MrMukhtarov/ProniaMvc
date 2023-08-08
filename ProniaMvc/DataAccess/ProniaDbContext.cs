@@ -17,6 +17,7 @@ public class ProniaDbContext : IdentityDbContext
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Setting> Settings { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<ProductComment> ProductComments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

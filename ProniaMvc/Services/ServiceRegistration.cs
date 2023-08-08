@@ -10,6 +10,7 @@ public static class ServiceRegistration
     public static void AddService(this IServiceCollection services)
     {
         services.AddScoped<ISliderService, SliderService>();
+        services.AddScoped<IEmailService, EmailServce>();
         services.AddScoped<IFileService, FileService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICategoryService, CategoryService>();

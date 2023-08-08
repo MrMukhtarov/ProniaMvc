@@ -314,6 +314,51 @@ namespace ProniaMvc.Migrations
                     b.ToTable("ProductCategories");
                 });
 
+            modelBuilder.Entity("ProniaMvc.Models.ProductComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductComments");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -477,6 +522,27 @@ namespace ProniaMvc.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("ProniaMvc.Models.ProductComment", b =>
+                {
+                    b.HasOne("ProniaMvc.Models.AppUser", "AppUser")
+                        .WithMany("ProductComments")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("ProniaMvc.Models.ProductComment", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.HasOne("ProniaMvc.Models.Product", "Product")
+                        .WithMany("ProductComments")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("ProniaMvc.Models.ProductImage", b =>
                 {
                     b.HasOne("ProniaMvc.Models.Product", "Product")
@@ -497,7 +563,14 @@ namespace ProniaMvc.Migrations
                 {
                     b.Navigation("ProductCategories");
 
+                    b.Navigation("ProductComments");
+
                     b.Navigation("ProductImages");
+                });
+
+            modelBuilder.Entity("ProniaMvc.Models.AppUser", b =>
+                {
+                    b.Navigation("ProductComments");
                 });
 #pragma warning restore 612, 618
         }

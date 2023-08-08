@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProniaMvc.Extentions;
@@ -7,6 +8,7 @@ using ProniaMvc.ViewModels.ProductVMs;
 
 namespace ProniaMvc.Areas.Manage.Controllers;
 [Area("Manage")]
+[Authorize(Roles = "Admin ,Editor")]
 public class ProductController : Controller
 {
     readonly IProductService _service;

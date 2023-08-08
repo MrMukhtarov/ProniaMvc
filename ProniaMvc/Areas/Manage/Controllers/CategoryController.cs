@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaMvc.Services.Interfaces;
 
 namespace ProniaMvc.Areas.Manage.Controllers;
 [Area("Manage")]
+[Authorize(Roles = "Admin ,Editor")]
 public class CategoryController : Controller
 {
     readonly ICategoryService _service;

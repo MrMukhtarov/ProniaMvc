@@ -8,4 +8,5 @@ public class AppUser : IdentityUser
     [Required]
     public string Fullname { get; set; }
     public DateTime BirthDate { get; set; }
+    public ICollection<ProductComment>? ProductComments { get; set; }
 }
