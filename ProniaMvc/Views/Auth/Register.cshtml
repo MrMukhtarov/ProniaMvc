@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Register";
-}
+﻿
 @model RegisterVM
 
 <!-- Begin Main Content Area -->
@@ -60,7 +58,7 @@
                                     <input asp-for="RepeatPassword">
                                     <span class="text-danger" asp-validation-for="RepeatPassword"></span>
                                 </div>
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger molde-onlys"></div>
                                 <div class="col-md-8">
                                     <div class="check-box">
                                         <input type="checkbox" id="remember_me">

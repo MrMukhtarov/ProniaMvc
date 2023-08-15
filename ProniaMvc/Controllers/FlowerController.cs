@@ -92,7 +92,7 @@ public class FlowerController : Controller
         }
         await _context.ProductComments.AddAsync(new ProductComment
         {
-            ProductsId = vm.ProductId,
+            ProductId = vm.ProductId,
             AppUser = user,
             UserId = user.Id,
             Comment = vm.Comment,

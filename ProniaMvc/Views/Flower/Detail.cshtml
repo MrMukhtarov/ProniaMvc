@@ -418,6 +418,14 @@
                             @comment.Comment
                         </p>
                         <a class="btn btn-custom-size comment-btn" href="javascript:void(0);">Reply</a>
+                        @if (User.Identity.Name == comment.AppUser.UserName || User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-pronia-primary" asp-action="DeleteComment">Delete</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-pronia-primary" asp-action="ReportComment">Report</a>
+                        }
                     </div>
                 </div>
             }

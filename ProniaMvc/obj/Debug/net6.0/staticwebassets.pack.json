@@ -7425,6 +7425,10 @@
       "PackagePath": "staticwebassets\\Admin\\vendor\\jquery\\jquery.slim.min.map"
     },
     {
+      "Id": "C:\\Users\\hp\\Desktop\\ProniaMvc\\ProniaMvc\\wwwroot\\EmailConfirmation.html",
+      "PackagePath": "staticwebassets\\EmailConfirmation.html"
+    },
+    {
       "Id": "C:\\Users\\hp\\Desktop\\ProniaMvc\\ProniaMvc\\wwwroot\\assets\\css\\Pe-icon-7-stroke.css",
       "PackagePath": "staticwebassets\\assets\\css\\Pe-icon-7-stroke.css"
     },

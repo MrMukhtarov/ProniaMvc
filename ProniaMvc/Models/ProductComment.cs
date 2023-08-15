@@ -3,7 +3,7 @@
 public class ProductComment : BaseEntity
 {
     public string UserId { get; set; }
-    public int ProductsId { get; set; }
+    public int ProductId { get; set; }
     public string Comment { get; set; }
     public DateTime PostedTime { get; set; }
     public Product? Product { get; set; }

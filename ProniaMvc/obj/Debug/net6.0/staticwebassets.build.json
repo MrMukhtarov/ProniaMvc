@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ibtc54cIxSlo7kdRtRKT44KpFRkcg5oVPCvkRnyOons=",
+  "Hash": "gBQWR3DRzAZtLGSw9MP+NSzH1XoDzXy5NQ1DB1CjrcY=",
   "Source": "ProniaMvc",
   "BasePath": "_content/ProniaMvc",
   "Mode": "Default",
@@ -34440,6 +34440,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\select2\\js\\select2.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\hp\\Desktop\\ProniaMvc\\ProniaMvc\\wwwroot\\EmailConfirmation.html",
+      "SourceId": "ProniaMvc",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hp\\Desktop\\ProniaMvc\\ProniaMvc\\wwwroot\\",
+      "BasePath": "_content/ProniaMvc",
+      "RelativePath": "EmailConfirmation.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\EmailConfirmation.html"
     },
     {
       "Identity": "C:\\Users\\hp\\Desktop\\ProniaMvc\\ProniaMvc\\wwwroot\\error.html",

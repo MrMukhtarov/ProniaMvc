@@ -23,7 +23,8 @@ builder.Services.AddDbContext<ProniaDbContext>(opt =>
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
     opt.Lockout.MaxFailedAccessAttempts = 1;
-    opt.SignIn.RequireConfirmedEmail = false;
+    opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedEmail = true;
 }).AddDefaultTokenProviders().AddEntityFrameworkStores<ProniaDbContext>();
 builder.Services.AddHttpContextAccessor();
 

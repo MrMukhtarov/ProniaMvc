@@ -18,6 +18,7 @@ public class ProniaDbContext : IdentityDbContext
     public DbSet<Setting> Settings { get; set; }
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<ProductComment> ProductComments { get; set; }
+    public DbSet<UserToken> UserTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
